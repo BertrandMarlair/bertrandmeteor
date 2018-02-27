@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+	<title>LED Controller</title>
+	<meta name="viewport" content="width=400px" />
+	
+	<script src="socket.io/socket.io.js"></script>
+	<link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+        
+    <span id="outputText">50</span>
+        <button id="rel" onClick="testOn(2)">Relai 1 On</button>
+        <button id="rel" onClick="testOff(2)">Relai 1 Off</button>
+        <button id="rel" onClick="testOn(3)">Relai 2 On</button>
+        <button id="rel" onClick="testOff(3)">Relai 2 Off</button>
+        <button id="rel" onClick="testOn(4)">Relai 3 On</button>
+        <button id="rel" onClick="testOff(4)">Relai 3 Off</button>
+        <button id="rel" onClick="testOn(5)">Relai 4 On</button>
+        <button id="rel" onClick="testOff(5)">Relai 4 Off</button>
+        <button id="rel" onClick="testOn(6)">Relai 5 On</button>
+        <button id="rel" onClick="testOff(6)">Relai 5 Off</button>
+        <button id="rel" onClick="testOn(7)">Relai 6 On</button>
+        <button id="rel" onClick="testOff(7)">Relai 6 Off</button>
+        <button id="rel" onClick="testOn(8)">Relai 7 On</button>
+        <button id="rel" onClick="testOff(8)">Relai 7 Off</button>
+        <button id="rel" onClick="testOn(9)">Relai 8 On</button>
+        <button id="rel" onClick="testOff(9)">Relai 8 Off</button>
+        <button id="rel" onClick="testOn(10)">Relai 9 On</button>
+        <button id="rel" onClick="testOff(10)">Relai 9 Off</button>
+        <button id="rel" onClick="testOn(11)">Relai 10 On</button>
+        <button id="rel" onClick="testOff(11)">Relai 10 Off</button>
+        <button id="rel" onClick="testOn(12)">Relai 11 On</button>
+        <button id="rel" onClick="testOff(12)">Relai 11 Off</button>
+        <button id="rel" onClick="testOn(13)">Relai 12 On</button>
+        <button id="rel" onClick="testOff(13)">Relai 12 Off</button>
+        <button id="rel" onClick="testOn('a0')">Relai 13 On</button>
+        <button id="rel" onClick="testOff('a0')">Relai 13 Off</button>
+        <button id="rel" onClick="testOn('a1')">Relai 14 On</button>
+        <button id="rel" onClick="testOff('a1')">Relai 14 Off</button>
+        <button id="rel" onClick="testOn('a2')">Relai 15 On</button>
+        <button id="rel" onClick="testOff('a2')">Relai 15 Off</button>
+        <button id="rel" onClick="testOn('a3')">Relai 16 On</button>
+        <button id="rel" onClick="testOff('a3')">Relai 16 Off</button>
+        
+	
+	<script type="text/javascript">
+        var socket = io.connect();
+        var color = {};
+        
+		function showValue(newValue)
+		{
+            console.log(newValue);
+			socket.emit('led', { value: newValue });
+        }
+
+        function testOn(newValue)
+		{
+			socket.emit('led:on', { value: newValue });
+        }
+
+        function testOff(newValue)
+		{
+			socket.emit('led:off', { value: newValue });
+        }
+        
+        send = () => {
+            socket.emit('change color', this.state.color);
+        }
+
+        sendLed = (led) => {
+            socket.emit('led picker', led);
+        }
+
+        setColor = (color) => {
+            color = ({ color })
+        }
+
+        socket.on('change color', (col) => {
+            document.body.style.backgroundColor = col
+        })
+	</script>
+  </body>
+</html>
